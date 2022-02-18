@@ -1,0 +1,10 @@
+<div class="col-12 col-md-6 col-lg-4 mt-4">
+<div class="card" style="width: 18rem;">
+    <img src="{{post.image.url}}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{post.title}}</h5>
+      <p class="card-text">{{post.excerpt}}</p>
+      <a href="{% url 'post-detail' post.slug %}" class="btn btn-primary">Read Full</a>
+    </div>
+  </div>
+</div>

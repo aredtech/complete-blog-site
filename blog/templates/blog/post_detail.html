@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-12">
+            <h3>{{post.title}}</h3>
+            <p>
+                {% for tag in post_tags %} 
+                    {{tag.tag}}
+                {% endfor %}
+            </p>
+            <hr>
+        </div>
+        <div class="col-12">
+            <img src="{{post.image.url}}"  class="img-fluid" alt="">
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
