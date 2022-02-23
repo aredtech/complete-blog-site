@@ -1,5 +1,3 @@
-from distutils.command.upload import upload
-import email
 from django.db import models
 
 # Create your models here.
@@ -69,6 +67,9 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
 class Tags(models.Model):
     tag = models.CharField(max_length=20)
 
+    class Meta:
+        verbose_name_plural = "Tags"
+
 class Author(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
@@ -87,6 +88,7 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=False)
     text = models.TextField()
 
 class ContactMe(models.Model):

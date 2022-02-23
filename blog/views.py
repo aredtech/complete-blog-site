@@ -1,9 +1,33 @@
+from re import template
 from django.shortcuts import render
 from django.views.generic import ListView, TemplateView, DetailView
+from django.urls import reverse_lazy
+from django.views.generic import FormView
 from django.views.generic.edit import CreateView
 from .models import Post, ContactMe
-from .forms import ContactMeForm
+from .forms import ContactMeForm, RegistrationForm
+from django.contrib.auth.views import LoginView
+# from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
+class RegisterPageView(FormView):
+    template_name = "blog/register.html"
+    fields = "_all_"
+    form_class = RegistrationForm
+    redirect_authenticated_user = True
+    success_url = reverse_lazy("index")
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+
+class CustomLoginView(LoginView):
+    template_name = "blog/login.html"
+    fields = "__all__"
+    redirect_authenticated_user = True
+
+    def get_success_url(self):
+        return reverse_lazy("index")
+
 class IndexListView(ListView):
     template_name = "blog/index.html"
     model = Post

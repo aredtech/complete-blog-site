@@ -6,6 +6,7 @@
     <div class="row mt-4">
         <div class="col-12">
             <h3>Contact Me</h3>
+            {{request.user}}
             <hr>
             <form class="form-horizontal" method="post">{% csrf_token %}
                 <fieldset>
