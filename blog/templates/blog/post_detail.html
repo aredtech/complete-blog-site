@@ -19,6 +19,43 @@
             <p>{{post.content}}</p>
         </div>
     </div>
+    <hr>
+    <div class="row text-center">
+        <div class="col-12">
+            <h3>Comments</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <h5>Latest Comments</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+
+                <div>
+                    {% for comment in comments %}
+                        <h6>{{request.user.name}}</h6>
+                        <p>{{comment}}</p>
+                    {% endfor %}
+                </div>    
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-6">
+            {% if user.is_authenticated %}
+            <form action="{% url 'post-detail' post.slug %}" method="POST">
+                {% csrf_token %}
+                {{comment_form.as_p}}
+                <button>Submit</button>
+            </form>
+            {% else %}
+            <h4>You need to signed in to comment</h4>
+            <button type="button" class="btn btn-outline-light me-2"><a href="{% url 'login' %}">Login</a></button>
+            {% endif %}
+        </div>
+    </div>
 </div>
 
 {% endblock content %}
